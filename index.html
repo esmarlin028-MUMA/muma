@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Museo de Arte Nacional — Colecciones Permanentes</title>
+  <meta name="description" content="Descubre las grandes obras del arte universal en un espacio de contemplación y belleza.">
+
+  <style>
+    :root {
+      --hueso:        #f7f4ec;
+      --hueso-suave:  #f0ebe0;
+      --beige-1:      #d0c9af;
+      --beige-2:      #bbaf97;
+      --beige-3:      #b09b74;
+      --beige-4:      #a58957;
+      --marron:       #6b5c3f;
+
+      --texto:        #3d3428;
+      --texto-suave:  #5c5040;
+      --blanco:       #ffffff;
+      --sombra:       rgba(107, 92, 63, 0.12);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Georgia", "Times New Roman", serif;
+      background-color: var(--hueso);
+      color: var(--texto);
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 5.5rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--marron);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-header p {
+      color: var(--texto-suave);
+      font-size: 1.05rem;
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(247, 244, 236, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--beige-1);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .header.scrolled {
+      box-shadow: 0 4px 20px var(--sombra);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.25rem;
+      letter-spacing: 0.04em;
+      color: var(--marron);
+    }
+
+    .logo-icon {
+      font-size: 1.1rem;
+      color: var(--beige-4);
+    }
+
+    .nav ul {
+      display: flex;
+      gap: 2.2rem;
+    }
+
+    .nav a {
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--texto-suave);
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.25s;
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 1px;
+      background: var(--beige-4);
+      transition: width 0.3s ease;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--marron);
+    }
+
+    .nav a:hover::after,
+    .nav a.active::after {
+      width: 100%;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--marron);
+      transition: 0.3s;
+    }
+
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      background: 
+        linear-gradient(to bottom, rgba(107, 92, 63, 0.45), rgba(107, 92, 63, 0.65)),
+        url('https://images.unsplash.com/photo-1564399580075-2c4c6c2c0e5a?w=1600') center/cover no-repeat;
+      color: var(--hueso);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 640px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.9rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      opacity: 0.85;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.4rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 2.5rem;
+      max-width: 480px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2.1rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: var(--beige-4);
+      color: var(--hueso);
+    }
+
+    .btn-primary:hover {
+      background: var(--marron);
+      transform: translateY(-2px);
+    }
+
+    .intro {
+      background: var(--hueso-suave);
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .intro-text h2 {
+      font-size: 2.1rem;
+      color: var(--marron);
+      margin-bottom: 1.4rem;
+      font-weight: 400;
+    }
+
+    .intro-text p {
+      margin-bottom: 1.1rem;
+      color: var(--texto-suave);
+    }
+
+    .intro-stats {
+      display: grid;
+      gap: 1.8rem;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 1.6rem;
+      background: var(--hueso);
+      border: 1px solid var(--beige-1);
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 2.4rem;
+      color: var(--beige-4);
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--texto-suave);
+    }
+
+    .colecciones-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .coleccion-card {
+      background: var(--blanco);
+      border: 1px solid var(--beige-1);
+      overflow: hidden;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .coleccion-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px var(--sombra);
+    }
+
+    .card-image {
+      height: 220px;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s ease;
+    }
+
+    .coleccion-card:hover .card-image {
+      transform: scale(1.05);
+    }
+
+    .card-body {
+      padding: 1.6rem 1.5rem 1.8rem;
+    }
+
+    .card-body h3 {
+      font-size: 1.25rem;
+      color: var(--marron);
+      margin-bottom: 0.5rem;
+      font-weight: 400;
+    }
+
+    .card-body p {
+      font-size: 0.95rem;
+      color: var(--texto-suave);
+      margin-bottom: 1rem;
+    }
+
+    .card-count {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--beige-4);
+    }
+
+    .exposiciones {
+      background: var(--hueso-suave);
+    }
+
+    .filtros {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2.8rem;
+      flex-wrap: wrap;
+    }
+
+    .filtro-btn {
+      background: transparent;
+      border: 1px solid var(--beige-2);
+      color: var(--texto-suave);
+      padding: 0.55rem 1.4rem;
+      font-family: inherit;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .filtro-btn:hover,
+    .filtro-btn.active {
+      background: var(--beige-4);
+      border-color: var(--beige-4);
+      color: var(--hueso);
+    }
+
+    .exposiciones-lista {
+      display: grid;
+      gap: 1.4rem;
+    }
+
+    .expo-card {
+      background: var(--hueso);
+      border-left: 4px solid var(--beige-3);
+      padding: 1.8rem 2rem;
+      display: grid;
+      grid-template-columns: 180px 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .expo-card.oculto {
+      display: none;
+    }
+
+    .expo-fecha {
+      font-size: 0.9rem;
+      color: var(--beige-4);
+      letter-spacing: 0.04em;
+    }
+
+    .expo-card h3 {
+      font-size: 1.3rem;
+      color: var(--marron);
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+
+    .expo-card p {
+      color: var(--texto-suave);
+      font-size: 0.95rem;
+    }
+
+    .expo-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.8rem;
+      background: var(--beige-1);
+      color: var(--marron);
+    }
+
+    .expo-tag.proxima {
+      background: var(--beige-3);
+      color: var(--hueso);
+    }
+
+    .galeria-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .galeria-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--beige-1);
+      aspect-ratio: 4/5;
+    }
+
+    .galeria-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease, opacity 0.4s;
+    }
+
+    .galeria-item:hover img {
+      transform: scale(1.06);
+      opacity: 0.88;
+    }
+
+    .galeria-item figcaption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.1rem;
+      background: linear-gradient(transparent, rgba(107, 92, 63, 0.85));
+      color: var(--hueso);
+      font-size: 0.95rem;
+      transform: translateY(100%);
+      transition: transform 0.35s ease;
+    }
+
+    .galeria-item:hover figcaption {
+      transform: translateY(0);
+    }
+
+    .visitar-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .info-block {
+      margin-bottom: 2.2rem;
+    }
+
+    .info-block h3 {
+      font-size: 1.15rem;
+      color: var(--marron);
+      margin-bottom: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+
+    .info-block ul li,
+    .info-block p {
+      color: var(--texto-suave);
+      margin-bottom: 0.4rem;
+    }
+
+    .visita-form {
+      background: var(--hueso-suave);
+      padding: 2.5rem;
+      border: 1px solid var(--beige-1);
+    }
+
+    .visita-form h3 {
+      font-size: 1.4rem;
+      color: var(--marron);
+      margin-bottom: 1.8rem;
+      font-weight: 400;
+    }
+
+    .form-group {
+      margin-bottom: 1.3rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--texto-suave);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--beige-2);
+      background: var(--hueso);
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--texto);
+      transition: border-color 0.25s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--beige-4);
+    }
+
+    .form-mensaje {
+      margin-top: 1.2rem;
+      font-size: 0.95rem;
+      color: var(--beige-4);
+      min-height: 1.4em;
+    }
+
+    .contacto {
+      background: var(--hueso-suave);
+      text-align: center;
+    }
+
+    .contacto-content p {
+      color: var(--texto-suave);
+      margin-bottom: 0.6rem;
+    }
+
+    .contacto-dato {
+      font-size: 1.1rem;
+    }
+
+    .footer {
+      background: var(--marron);
+      color: var(--beige-1);
+      padding: 2.5rem 0;
+      text-align: center;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-brand .logo-icon {
+      color: var(--beige-3);
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(61, 52, 40, 0.92);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s, visibility 0.35s;
+      padding: 2rem;
+    }
+
+    .lightbox.activo {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox img {
+      max-height: 75vh;
+      max-width: 90vw;
+      object-fit: contain;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .lightbox-caption {
+      text-align: center;
+      color: var(--hueso);
+      margin-top: 1.4rem;
+    }
+
+    .lightbox-caption h3 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+    }
+
+    .lightbox-caption p {
+      opacity: 0.8;
+      font-size: 0.95rem;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      color: var(--hueso);
+      font-size: 2.8rem;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
+    .lightbox-close:hover {
+      opacity: 1;
+    }
+
+    @media (max-width: 900px) {
+      .intro-grid,
+      .visitar-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .expo-card {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-toggle {
+        display: flex;
+      }
+
+      .nav {
+        position: fixed;
+        top: 72px;
+        left: 0;
+        width: 100%;
+        background: var(--hueso);
+        border-bottom: 1px solid var(--beige-1);
+        padding: 1.5rem 0;
+        transform: translateY(-120%);
+        opacity: 0;
+        transition: transform 0.35s ease, opacity 0.35s ease;
+      }
+
+      .nav.abierto {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.4rem;
+      }
+
+      .hero {
+        min-height: 520px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header" id="inicio">
+    <div class="container header-inner">
+      <a href="#inicio" class="logo">
+        <span class="logo-icon">◆</span>
+        <span class="logo-text">Museo de Arte</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="mainNav">
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#colecciones">Colecciones</a></li>
+          <li><a href="#exposiciones">Exposiciones</a></li>
+          <li><a href="#visitar">Visitar</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <p class="hero-eyebrow">10/9/2026</p>
+      <h1>Donde el arte<br>encuentra el silencio</h1>
+      <p class="hero-subtitle">Un espacio dedicado a la contemplación de las grandes obras de la humanidad.</p>
+      <a href="#colecciones" class="btn btn-primary">Explorar colecciones</a>
+    </div>
+  </section>
+
+  <section class="intro section">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-text">
+          <h2>El Museo</h2>
+          <p>Fundado debido a una asignatura de willintong hacia el estudiante 31 de la lista el cual se esforzo y saco adelante el arte del talentoso club de dibujo.</p>
+          <p>Cada parte ha sido pensada para que la obra hable por sí misma.</p>
+        </div>
+        <div class="intro-stats">
+          <div class="stat">
+            <span class="stat-number" data-target="53">0</span>
+            <span class="stat-label">Obras</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-target="8">0</span>
+            <span class="stat-label">Salas</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number" data-target="10/9/2026">0</span>
+            <span class="stat-label">fundación</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="colecciones section" id="colecciones">
+    <div class="container">
+      <div class="section-header">
+        <h2>Colecciones Permanentes</h2>
+        <p>Un recorrido por los grandes periodos del arte</p>
+      </div>
+
+      <div class="colecciones-grid">
+        <article class="coleccion-card" data-category="renacimiento">
+          <div class="card-image" style="background-image: url('https://i.imgur.com/lRNx9yI.jpeg?w=600')"></div>
+          <div class="card-body">
+            <h3>Renacimiento</h3>
+            <p>Obras maestras. Luz, perspectiva y humanismo.</p>
+            <span class="card-count">obras</span>
+          </div>
+        </article>
+
+        <article class="coleccion-card" data-category="barroco">
+          <div class="card-image" style="background-image: url('https://i.imgur.com/CxLayDJ.jpeg?w=600')"></div>
+          <div class="card-body">
+            <h3>Barroco</h3>
+            <p>Dramatismo, contraste y emoción en su máxima expresión.</p>
+            <span class="card-count">obras</span>
+          </div>
+        </article>
+
+        <article class="coleccion-card" data-category="impresionismo">
+          <div class="card-image" style="background-image: url('https://i.imgur.com/6nnL9F3.jpeg?w=600')"></div>
+          <div class="card-body">
+            <h3>Impresionismo</h3>
+            <p>La luz y el color de una vida miserable.</p>
+            <span class="card-count">obras</span>
+          </div>
+        </article>
+
+        <article class="coleccion-card" data-category="moderno">
+          <div class="card-image" style="background-image: url('https://i.imgur.com/NKh0LiF.jpeg?w=600')"></div>
+          <div class="card-body">
+            <h3>Arte Moderno</h3>
+            <p>Las rupturas de una fragil flor.</p>
+            <span class="card-count">obras</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="exposiciones section" id="exposiciones">
+    <div class="container">
+      <div class="section-header">
+        <h2>Exposiciones Temporales</h2>
+        <p>Muestras especiales de temporada</p>
+      </div>
+
+      <div class="filtros">
+        <button class="filtro-btn active" data-filter="todas">Todas</button>
+        <button class="filtro-btn" data-filter="actual">En curso</button>
+        <button class="filtro-btn" data-filter="proxima">Próximas</button>
+      </div>
+
+      <div class="exposiciones-lista" id="exposicionesLista">
+        <article class="expo-card" data-status="actual">
+          <div class="expo-fecha">12 Sep — 28 Nov 2026</div>
+          <h3>La luz interior</h3>
+          <p>Una mirada íntima a los retratos.</p>
+          <span class="expo-tag">En curso</span>
+        </article>
+
+        <article class="expo-card" data-status="actual">
+          <div class="expo-fecha">01 Oct — 15 Ene 2027</div>
+          <h3>Geometrías del silencio</h3>
+          <p>Escultura minimalista y espacios de contemplación.</p>
+          <span class="expo-tag">En curso</span>
+        </article>
+
+        <article class="expo-card" data-status="proxima">
+          <div class="expo-fecha">20 Feb — 30 Abr 2027</div>
+          <h3>Colores del desierto</h3>
+          <p>Pintura contemporánea de artista mari.</p>
+          <span class="expo-tag proxima">Próxima</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="galeria section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Obras Destacadas</h2>
+      </div>
+
+      <div class="galeria-grid" id="galeriaGrid">
+        <figure class="galeria-item" data-title="La dama del velo" data-artist="">
+          <img src="https://i.imgur.com/uDgnptd.jpeg?w=500" alt="La dama del velo">
+          <figcaption>La dama y la daga</figcaption>
+        </figure>
+        <figure class="galeria-item" data-title="Paisaje con río" data-artist="">
+          <img src="https://i.imgur.com/BXjM5jl.jpeg?w=500" alt="Paisaje con río">
+          <figcaption>Descanso eterno</figcaption>
+        </figure>
+        <figure class="galeria-item" data-title="Naturaleza muerta" data-artist="">
+          <img src="https://i.imgur.com/FUs3FPa.jpeg?w=500" alt="Naturaleza muerta">
+          <figcaption>Naturaleza muerta</figcaption>
+        </figure>
+        <figure class="galeria-item" data-title="Figura en sombra" data-artist="">
+          <img src="https://i.imgur.com/5Xo6hGK.jpegw=500" alt="Figura en sombra">
+          <figcaption>Bar de mala muerte</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="visitar section" id="visitar">
+    <div class="container">
+      <div class="section-header">
+        <h2>Planifica tu visita</h2>
+      </div>
+
+      <div class="visitar-grid">
+        <div class="visitar-info">
+          <div class="info-block">
+            <h3>Horarios</h3>
+            <ul>
+              <li><strong>Martes a Viernes</strong> — 10:00 a 18:00</li>
+              <li><strong>Sábados y Domingos</strong> — 10:00 a 20:00</li>
+              <li><strong>Lunes</strong> — Cerrado</li>
+            </ul>
+          </div>
+          <div class="info-block">
+            <h3>Entradas</h3>
+            <ul>
+              <li>General — 200 pesos</li>
+              <li>Estudiantes / Mayores — 150 pesos</li>
+              <li>Menores de 12 años — Gratis</li>
+            </ul>
+          </div>
+          <div class="info-block">
+            <h3>Dirección</h3>
+            <p>Plaza de las Artes, 1<br>28001</p>
+          </div>
+        </div>
+
+        <form class="visita-form" id="visitaForm">
+          <h3>Reserva tu entrada</h3>
+          <div class="form-group">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="fecha">Fecha de visita</label>
+            <input type="date" id="fecha" name="fecha" required>
+          </div>
+          <div class="form-group">
+            <label for="personas">Número de personas</label>
+            <input type="number" id="personas" name="personas" min="1" max="10" value="1" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Solicitar reserva</button>
+          <p class="form-mensaje" id="formMensaje"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="contacto section" id="contacto">
+    <div class="container">
+      <div class="section-header">
+        <h2>Contacto</h2>
+      </div>
+      <div class="contacto-content">
+        <p>Para grupos, visitas guiadas o consultas especiales:</p>
+        <p class="contacto-dato"><strong>Email:</strong> esmarlintejadaclase@gmail.com</p>
+        <p class="contacto-dato"><strong>Teléfono:</strong> (829)906-4971</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="logo-icon">◆</span>
+          <span>Museo de Arte Nacional</span>
+        </div>
+        <p>© 2026 Museo de Arte Nacional. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">×</button>
+    <img src="" alt="" id="lightboxImg">
+    <div class="lightbox-caption">
+      <h3 id="lightboxTitle"></h3>
+      <p id="lightboxArtist"></p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      const navToggle = document.getElementById('navToggle');
+      const mainNav = document.getElementById('mainNav');
+
+      navToggle.addEventListener('click', () => {
+        mainNav.classList.toggle('abierto');
+        navToggle.classList.toggle('activo');
+      });
+
+      mainNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mainNav.classList.remove('abierto');
+        });
+      });
+
+      const header = document.querySelector('.header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      const stats = document.querySelectorAll('.stat-number');
+      let contadoresActivados = false;
+
+      function animarContadores() {
+        stats.forEach(stat => {
+          const target = +stat.getAttribute('data-target');
+          const duracion = 1800;
+          const incremento = target / (duracion / 16);
+          let actual = 0;
+
+          const timer = setInterval(() => {
+            actual += incremento;
+            if (actual >= target) {
+              stat.textContent = target.toLocaleString('es-ES');
+              clearInterval(timer);
+            } else {
+              stat.textContent = Math.floor(actual).toLocaleString('es-ES');
+            }
+          }, 16);
+        });
+      }
+
+      const introSection = document.querySelector('.intro');
+      const observerStats = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !contadoresActivados) {
+            contadoresActivados = true;
+            animarContadores();
+          }
+        });
+      }, { threshold: 0.4 });
+
+      if (introSection) observerStats.observe(introSection);
+
+      const filtroBtns = document.querySelectorAll('.filtro-btn');
+      const expoCards = document.querySelectorAll('.expo-card');
+
+      filtroBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filtroBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filtro = btn.getAttribute('data-filter');
+
+          expoCards.forEach(card => {
+            const status = card.getAttribute('data-status');
+            if (filtro === 'todas' || status === filtro) {
+              card.classList.remove('oculto');
+            } else {
+              card.classList.add('oculto');
+            }
+          });
+        });
+      });
+
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxTitle = document.getElementById('lightboxTitle');
+      const lightboxArtist = document.getElementById('lightboxArtist');
+      const lightboxClose = document.getElementById('lightboxClose');
+      const galeriaItems = document.querySelectorAll('.galeria-item');
+
+      galeriaItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const img = item.querySelector('img');
+          lightboxImg.src = img.src.replace('w=500', 'w=1200');
+          lightboxImg.alt = img.alt;
+          lightboxTitle.textContent = item.getAttribute('data-title');
+          lightboxArtist.textContent = item.getAttribute('data-artist');
+          lightbox.classList.add('activo');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function cerrarLightbox() {
+        lightbox.classList.remove('activo');
+        document.body.style.overflow = '';
+      }
+
+      lightboxClose.addEventListener('click', cerrarLightbox);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) cerrarLightbox();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') cerrarLightbox();
+      });
+
+      const visitaForm = document.getElementById('visitaForm');
+      const formMensaje = document.getElementById('formMensaje');
+
+      visitaForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const nombre = document.getElementById('nombre').value.trim();
+        const fecha = document.getElementById('fecha').value;
+
+        formMensaje.textContent = `Gracias ${nombre}. Hemos recibido tu solicitud para el ${formatearFecha(fecha)}. Te contactaremos pronto.`;
+        formMensaje.style.color = 'var(--beige-4)';
+
+        visitaForm.reset();
+
+        setTimeout(() => {
+          formMensaje.textContent = '';
+        }, 6000);
+      });
+
+      function formatearFecha(fechaISO) {
+        const opciones = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(fechaISO).toLocaleDateString('es-ES', opciones);
+      }
+
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav a');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop - 100;
+          if (window.scrollY >= sectionTop) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+    });
+  </script>
+</body>
+</html>
